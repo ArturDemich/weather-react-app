@@ -1,8 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 interface Props {}
 
 export const InfoCityWeather = (props: Props) => {
-
-	return <div>Info City Weather</div>
+    return <div>Info City Weather</div>
 }
