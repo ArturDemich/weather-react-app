@@ -9,8 +9,8 @@ export const GlobalSvgSelector = ({ id }: Props) => {
         case 'header-logo':
             return (
                 <svg
-                    width="80"
-                    height="80"
+                    width="50"
+                    height="50"
                     viewBox="0 0 65 65"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
