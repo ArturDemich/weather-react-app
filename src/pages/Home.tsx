@@ -1,11 +1,11 @@
 import { Button, Container, Grid } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useCustomDispatch, useCustomSelector } from '../hooks/store'
 import { selectCurrentWeatherData } from '../localStorage/selectors'
-import { fetchCurrentWeather } from '../localStorage/thunks/fetchCurrentWeather'
 import WeatherCard from '../components/WeatherCard'
 import ModalAddCity from '../components/modalAddCity'
+import { Weather } from '../localStorage/types'
 
 interface Props {}
 
@@ -14,21 +14,19 @@ export const Home = (props: Props) => {
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
-    const dispatch = useCustomDispatch()
-    const { weather } = useCustomSelector(selectCurrentWeatherData)
+    const { weathers } = useCustomSelector(selectCurrentWeatherData)
 
-    useEffect(() => {
-        dispatch(fetchCurrentWeather('uzhgorod'))
-    }, [])
     return (
         <Container>
             <ModalAddCity open={open} onClose={handleClose} />
             <Grid container spacing={2}>
-                <WeatherCard weather={weather} />
+                {weathers.map((el: Weather) => (
+                    <WeatherCard weather={el} key={el.id} />
+                ))}
                 <Button
                     variant="outlined"
                     onClick={handleOpen}
-                    sx={{ fontSize: '35px', m: '1rem' }}
+                    sx={{ fontSize: '35px', m: '1rem', height: '250px' }}
                 >
                     +
                 </Button>

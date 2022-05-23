@@ -32,6 +32,7 @@ const ModalAddCity = ({ open, onClose }: Props) => {
     function load(city: string) {
         dispatch(fetchCurrentWeather(city))
         onClose()
+        setInput('')
     }
     return (
         <div>
