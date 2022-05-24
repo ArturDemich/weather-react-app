@@ -15,7 +15,7 @@ import { GlobalSvgSelector } from '../assets/GlobalSvgSelector'
 import { Link } from 'react-router-dom'
 import { Weather } from '../localStorage/types'
 import { useCustomDispatch } from '../hooks/store'
-import { removeCard } from '../localStorage/slices/currentWeatherSlice'
+import { removeWeatherCard } from '../localStorage/slices/currentWeatherSlice'
 import { fetchCurrentWeather } from '../localStorage/thunks/fetchCurrentWeather'
 
 interface Props {
@@ -24,14 +24,13 @@ interface Props {
 
 const WeatherCard = ({ weather }: Props) => {
     const [date, setDate] = useState(Date())
-    console.log(date)
     const dispatch = useCustomDispatch()
 
-    function remove(id: number) {
-        dispatch(removeCard({ id }))
+    function removeCard(id: number) {
+        dispatch(removeWeatherCard({ id }))
     }
 
-    function reLoad() {
+    function updateCard() {
         dispatch(fetchCurrentWeather(weather.name))
     }
     return (
@@ -68,7 +67,7 @@ const WeatherCard = ({ weather }: Props) => {
                     <Button
                         variant="text"
                         startIcon={<DeleteIcon />}
-                        onClick={() => remove(weather.id)}
+                        onClick={() => removeCard(weather.id)}
                     >
                         Видалити
                     </Button>
@@ -76,7 +75,7 @@ const WeatherCard = ({ weather }: Props) => {
                         variant="outlined"
                         size="small"
                         endIcon={<RefreshIcon />}
-                        onClick={() => reLoad()}
+                        onClick={() => updateCard()}
                     >
                         Оновити
                     </Button>

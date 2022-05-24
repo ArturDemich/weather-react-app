@@ -4,57 +4,43 @@ import { Weather } from '../types';
 
 type CurrentWeather = {
   weathers: Weather[];
-  isLoading: boolean;
-  response: Response;
-};
-
-type Response = {
-  status: number;
-  message: string;
 };
 
 const initialState: CurrentWeather = {
   weathers: [],
-  isLoading: false,
-  response: {
-    status: 0,
-    message: '',
-  },
-};
+ };
 
 export const currentWeatherSlice = createSlice({
   name: 'current_weather',
   initialState,
   reducers: {
-    fetchCurrentWeather(state) {
-      state.isLoading = true;
-    },
-    fetchCurrentWeatherSuccess(
+    
+    addWeatherCard(
       state,
-      action: PayloadAction<AxiosResponse<Weather>>
-    ) {
-      state.isLoading = false;
-      state.weathers = [...state.weathers, action.payload.data];
-      state.response = {
-        status: action.payload.status,
-        message: action.payload.statusText,
-      };
+      action: PayloadAction<AxiosResponse<Weather>>) {
+      const weathers: Weather[] = state.weathers
+      
+      const existingCardIndex:number = weathers.findIndex((value) =>{
+        return value.id === action.payload.data.id
+      })
+      if(existingCardIndex > -1) {
+        weathers[existingCardIndex] = action.payload.data
+        state.weathers = weathers
+      } else {
+        state.weathers = [...state.weathers, action.payload.data];
+      }
+      localStorage.setItem('weathers', JSON.stringify(state.weathers))
     },
-    fetchCurrentWeatherError(
-      state,
-      action: PayloadAction<AxiosResponse<Weather>>
-    ) {
-      state.isLoading = false;
-      state.response = {
-        status: action.payload.status,
-        message: action.payload.statusText,
-      };
-    },
-    removeCard(state, action: PayloadAction<{id: number}>){
+    
+    removeWeatherCard(state, action: PayloadAction<{id: number}>){
       state.weathers = [...state.weathers.filter(el => el.id !== action.payload.id)]
+      localStorage.setItem('weathers', JSON.stringify(state.weathers))
+    },
+    setWeathersFromLS(state, action: PayloadAction<{ weathers: Weather[] }>){
+      state.weathers = action.payload.weathers
     }
   },
 });
 
-export const { removeCard } = currentWeatherSlice.actions;
+export const { addWeatherCard, removeWeatherCard, setWeathersFromLS } = currentWeatherSlice.actions;
 export default currentWeatherSlice.reducer;
