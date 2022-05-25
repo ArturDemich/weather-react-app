@@ -12,7 +12,6 @@ import {
 } from '@mui/material'
 import React from 'react'
 import { GlobalSvgSelector } from '../assets/GlobalSvgSelector'
-import ChartBar from '../components/chartBar'
 
 interface Props {}
 
@@ -44,7 +43,6 @@ export const InfoCityWeather = (props: Props) => {
                     </Box>
                 </CardContent>
                 <Divider />
-                <ChartBar />
 
                 <CardActions
                     sx={{

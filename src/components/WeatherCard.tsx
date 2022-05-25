@@ -25,6 +25,7 @@ interface Props {
 const WeatherCard = ({ weather }: Props) => {
     const [date, setDate] = useState(Date())
     const dispatch = useCustomDispatch()
+    // console.log(weather)
 
     function removeCard(id: number) {
         dispatch(removeWeatherCard({ id }))
@@ -32,6 +33,7 @@ const WeatherCard = ({ weather }: Props) => {
 
     function updateCard() {
         dispatch(fetchCurrentWeather(weather.name))
+        setDate(Date())
     }
     return (
         <Grid item xs={12} md={4}>
@@ -41,7 +43,7 @@ const WeatherCard = ({ weather }: Props) => {
                 }}
             >
                 <CardActionArea>
-                    <Link to="/info-city-weather">
+                    <Link to="/info-city-weather" state={weather}>
                         <Box
                             sx={{
                                 m: '1rem',
