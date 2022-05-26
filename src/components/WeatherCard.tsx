@@ -25,7 +25,6 @@ interface Props {
 const WeatherCard = ({ weather }: Props) => {
     const [date, setDate] = useState(Date())
     const dispatch = useCustomDispatch()
-    // console.log(weather)
 
     function removeCard(id: number) {
         dispatch(removeWeatherCard({ id }))
@@ -49,7 +48,7 @@ const WeatherCard = ({ weather }: Props) => {
                                 m: '1rem',
                             }}
                         >
-                            <GlobalSvgSelector id="sun" />
+                            <GlobalSvgSelector id={weather.weather[0].main} />
                         </Box>
                         <CardContent>
                             <Typography variant="h5" component="h3">

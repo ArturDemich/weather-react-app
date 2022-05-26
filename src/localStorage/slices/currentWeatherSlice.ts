@@ -1,13 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { Weather } from '../types';
+import { HourlyWeather, Weather } from '../types';
 
 type CurrentWeather = {
   weathers: Weather[];
+  hourlyWeather: HourlyWeather;
 };
 
 const initialState: CurrentWeather = {
   weathers: [],
+  hourlyWeather: {
+    hourly: [{ dt: 0, temp: 0}]
+  },
  };
 
 export const currentWeatherSlice = createSlice({
@@ -31,7 +35,10 @@ export const currentWeatherSlice = createSlice({
       }
       localStorage.setItem('weathers', JSON.stringify(state.weathers))
     },
-    
+    setHourlyWeather(state,
+      action: PayloadAction<AxiosResponse<HourlyWeather>>) {
+        state.hourlyWeather.hourly = action.payload.data.hourly
+      },
     removeWeatherCard(state, action: PayloadAction<{id: number}>){
       state.weathers = [...state.weathers.filter(el => el.id !== action.payload.id)]
       localStorage.setItem('weathers', JSON.stringify(state.weathers))
@@ -42,5 +49,5 @@ export const currentWeatherSlice = createSlice({
   },
 });
 
-export const { addWeatherCard, removeWeatherCard, setWeathersFromLS } = currentWeatherSlice.actions;
+export const { addWeatherCard, removeWeatherCard, setWeathersFromLS, setHourlyWeather } = currentWeatherSlice.actions;
 export default currentWeatherSlice.reducer;

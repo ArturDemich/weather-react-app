@@ -11,11 +11,34 @@ import {
     Typography,
 } from '@mui/material'
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import { GlobalSvgSelector } from '../assets/GlobalSvgSelector'
+import ChartBar from '../components/chartBar'
 
-interface Props {}
+interface Props {
+    coord: {
+        lat: number
+        lon: number
+    }
+    main: {
+        feelsTemp: number
+        temp: number
+        tempMax: number
+        tempMin: number
+    }
+    name: string
+    weather: [
+        {
+            main: string
+        }
+    ]
+}
 
-export const InfoCityWeather = (props: Props) => {
+export const InfoCityWeather = () => {
+    const location = useLocation().state as Props
+
+    // console.log(location.weather[0].main)
+
     return (
         <Container>
             <Card>
@@ -26,139 +49,24 @@ export const InfoCityWeather = (props: Props) => {
                     }}
                 >
                     <Box>
-                        <Typography variant="h4">Сьогодні</Typography>
+                        <Typography variant="h3">{location.name}</Typography>
+                        <Typography variant="h5">Сьогодні</Typography>
                         <Typography variant="body1">23:00</Typography>
                         <Typography variant="h4" component="h3">
-                            14°
+                            {Math.floor(location.main.temp)}°
                         </Typography>
-
-                        <Typography variant="h5">місто Ужгород</Typography>
                     </Box>
                     <Box
                         sx={{
                             m: '1rem',
                         }}
                     >
-                        <GlobalSvgSelector id="sun" />
+                        <GlobalSvgSelector id={location.weather[0].main} />
                     </Box>
                 </CardContent>
                 <Divider />
-
-                <CardActions
-                    sx={{
-                        m: '1rem',
-                        height: '10px',
-                    }}
-                >
-                    <Button variant="outlined"> Сьогодні </Button>
-                    <Button variant="outlined"> Завтра </Button>
-                    <Button variant="outlined"> На 10 днів </Button>
-                </CardActions>
+                <ChartBar lat={0} lon={0} />
             </Card>
-            <Grid
-                container
-                spacing={1}
-                sx={{
-                    mt: '1rem',
-                }}
-            >
-                <Grid item xs={3} md={2}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h3">
-                                14°
-                            </Typography>
-                            <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">23:00</Typography>
-                            <Typography variant="h6">Ужгород</Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={3} md={2}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h3">
-                                14°
-                            </Typography>
-                            <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">23:00</Typography>
-                            <Typography variant="h6">Ужгород</Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={3} md={2}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h3">
-                                14°
-                            </Typography>
-                            <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">23:00</Typography>
-                            <Typography variant="h6">Ужгород</Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={3} md={2}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h3">
-                                14°
-                            </Typography>
-                            <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">23:00</Typography>
-                            <Typography variant="h6">Ужгород</Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={3} md={2}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h3">
-                                14°
-                            </Typography>
-                            <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">23:00</Typography>
-                            <Typography variant="h6">Ужгород</Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={3} md={2}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h3">
-                                14°
-                            </Typography>
-                            <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">23:00</Typography>
-                            <Typography variant="h6">Ужгород</Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={3} md={2}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h3">
-                                14°
-                            </Typography>
-                            <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">23:00</Typography>
-                            <Typography variant="h6">Ужгород</Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={3} md={2}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" component="h3">
-                                14°
-                            </Typography>
-                            <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">23:00</Typography>
-                            <Typography variant="h6">Ужгород</Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
         </Container>
     )
 }
