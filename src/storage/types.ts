@@ -7,6 +7,7 @@ export type Weather = {
       temp_min: number,
       humidity: number,
     },
+    dt: number,
     name: string,
     timezone: number,  
     weather: [{

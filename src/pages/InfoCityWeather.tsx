@@ -11,9 +11,10 @@ import {
     Typography,
 } from '@mui/material'
 import React from 'react'
+import Moment from 'react-moment'
 import { useLocation } from 'react-router-dom'
 import { GlobalSvgSelector } from '../assets/GlobalSvgSelector'
-import ChartBar from '../components/chartBar'
+import ChartBar from '../components/ChartBar'
 
 interface Props {
     coord: {
@@ -21,11 +22,13 @@ interface Props {
         lon: number
     }
     main: {
-        feelsTemp: number
+        feels_like: number
         temp: number
-        tempMax: number
-        tempMin: number
+        temp_max: number
+        temp_min: number
     }
+    dt: number
+    timezona: number
     name: string
     weather: [
         {
@@ -36,8 +39,6 @@ interface Props {
 
 export const InfoCityWeather = () => {
     const location = useLocation().state as Props
-
-    // console.log(location.weather[0].main)
 
     return (
         <Container>
@@ -50,10 +51,19 @@ export const InfoCityWeather = () => {
                 >
                     <Box>
                         <Typography variant="h3">{location.name}</Typography>
-                        <Typography variant="h5">Сьогодні</Typography>
-                        <Typography variant="body1">23:00</Typography>
                         <Typography variant="h4" component="h3">
                             {Math.floor(location.main.temp)}°
+                        </Typography>
+                        <Typography variant="body1">
+                            Відчувається як:{' '}
+                            {Math.floor(location.main.feels_like)}°
+                        </Typography>
+                        <Divider />
+                        <Typography variant="h5">Сьогодні</Typography>
+                        <Typography variant="body1">
+                            <Moment format="DD/MM/YYYY hh:mm:ss" unix>
+                                {location.dt}
+                            </Moment>
                         </Typography>
                     </Box>
                     <Box
@@ -65,7 +75,7 @@ export const InfoCityWeather = () => {
                     </Box>
                 </CardContent>
                 <Divider />
-                <ChartBar lat={0} lon={0} />
+                <ChartBar lat={location.coord.lat} lon={location.coord.lon} />
             </Card>
         </Container>
     )

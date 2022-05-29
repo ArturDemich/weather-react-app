@@ -1,16 +1,17 @@
+import { render, screen } from '@testing-library/react'
 import React from 'react'
 import * as ReactDOM from 'react-dom'
 import { createRoot } from 'react-dom/client'
-import { Header } from './components/Header'
+import { Home } from '../pages/Home'
 
-describe('App component test', () => {
+describe('Home page component tests', () => {
     let container: HTMLDivElement
 
     beforeEach(() => {
         container = document.createElement('div')
         document.body.appendChild(container)
         const root = createRoot(container)
-        root.render(<Header />)
+        root.render(<Home />)
     })
 
     afterEach(() => {
@@ -18,8 +19,8 @@ describe('App component test', () => {
         container.remove()
     })
 
-    it('Renders correctly component Header', () => {
-        const header = document.querySelector('header')
-        expect(header).toBeInTheDocument
+    it('', () => {
+        const button = document.querySelector('[name=buttonAddgggCard]')
+        expect(button).toBeInTheDocument
     })
 })

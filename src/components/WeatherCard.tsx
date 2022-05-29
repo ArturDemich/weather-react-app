@@ -10,20 +10,20 @@ import {
 } from '@mui/material'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import DeleteIcon from '@mui/icons-material/Delete'
-import React, { useState } from 'react'
+import React from 'react'
 import { GlobalSvgSelector } from '../assets/GlobalSvgSelector'
 import { Link } from 'react-router-dom'
-import { Weather } from '../localStorage/types'
+import { Weather } from '../storage/types'
 import { useCustomDispatch } from '../hooks/store'
-import { removeWeatherCard } from '../localStorage/slices/currentWeatherSlice'
-import { fetchCurrentWeather } from '../localStorage/thunks/fetchCurrentWeather'
+import { removeWeatherCard } from '../storage/slices/currentWeatherSlice'
+import { fetchCurrentWeather } from '../storage/thunks/fetchWeathers'
+import Moment from 'react-moment'
 
 interface Props {
     weather: Weather
 }
 
 const WeatherCard = ({ weather }: Props) => {
-    const [date, setDate] = useState(Date())
     const dispatch = useCustomDispatch()
 
     function removeCard(id: number) {
@@ -32,7 +32,6 @@ const WeatherCard = ({ weather }: Props) => {
 
     function updateCard() {
         dispatch(fetchCurrentWeather(weather.name))
-        setDate(Date())
     }
     return (
         <Grid item xs={12} md={4}>
@@ -55,7 +54,12 @@ const WeatherCard = ({ weather }: Props) => {
                                 {Math.floor(weather.main.temp)}°
                             </Typography>
                             <Typography variant="body1">Сьогодні</Typography>
-                            <Typography variant="body1">{date}</Typography>
+                            <Typography variant="body1">
+                                <Moment format="DD/MM/YYYY hh:mm:ss" unix>
+                                    {weather.dt}
+                                </Moment>
+                            </Typography>
+
                             <Typography variant="h6">{weather.name}</Typography>
                         </CardContent>
                     </Link>

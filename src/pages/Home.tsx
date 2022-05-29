@@ -1,12 +1,11 @@
 import { Button, Container, Grid } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
 import React, { useEffect, useState } from 'react'
 import { useCustomDispatch, useCustomSelector } from '../hooks/store'
-import { selectCurrentWeatherData } from '../localStorage/selectors'
+import { selectCurrentWeatherData } from '../storage/selectors'
 import WeatherCard from '../components/WeatherCard'
-import ModalAddCity from '../components/modalAddCity'
-import { Weather } from '../localStorage/types'
-import { setWeathersFromLS } from '../localStorage/slices/currentWeatherSlice'
+import ModalAddCity from '../components/ModalAddCity'
+import { Weather } from '../storage/types'
+import { setWeathersFromLS } from '../storage/slices/currentWeatherSlice'
 
 export const Home = () => {
     const [open, setOpen] = useState(false)
@@ -30,6 +29,7 @@ export const Home = () => {
                     <WeatherCard weather={el} key={el.id} />
                 ))}
                 <Button
+                    name="buttonAddCard"
                     variant="outlined"
                     onClick={handleOpen}
                     sx={{ fontSize: '35px', m: '1rem', height: '350px' }}

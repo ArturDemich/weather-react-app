@@ -1,9 +1,9 @@
+import moment from 'moment'
 import React, { useEffect } from 'react'
 import Chart from 'react-apexcharts'
 import { useCustomDispatch, useCustomSelector } from '../hooks/store'
-import { selectCurrentWeatherData } from '../localStorage/selectors'
-import { setHourlyWeather } from '../localStorage/slices/currentWeatherSlice'
-import { fetchHourlyWeather } from '../localStorage/thunks/fetchCurrentWeather'
+import { selectCurrentWeatherData } from '../storage/selectors'
+import { fetchHourlyWeather } from '../storage/thunks/fetchWeathers'
 
 type Props = {
     lat: number
@@ -13,7 +13,7 @@ function ChartBar({ lat, lon }: Props) {
     const dispatch = useCustomDispatch()
 
     useEffect(() => {
-        dispatch(fetchHourlyWeather(33.44, -94.04))
+        dispatch(fetchHourlyWeather(lat, lon))
     }, [])
 
     const { hourlyWeather } = useCustomSelector(selectCurrentWeatherData)
@@ -22,13 +22,20 @@ function ChartBar({ lat, lon }: Props) {
     })
 
     const hourlyTemp: any = []
-    hourlyWeather.hourly.forEach((el, index, arr) => {
+    hourlyWeather.hourly.forEach((el, index) => {
         if (index <= 23) {
             return hourlyTemp.push(Math.round(el.temp) + '°')
         }
     })
 
-    console.log(hourlyTemp)
+    const hourly: any = []
+    hourlyWeather.hourly.forEach((el, index) => {
+        if (index <= 23) {
+            return hourly.push(moment(el.dt).format('HH:mm'))
+        }
+    })
+    console.log(hourly)
+
     const state = {
         options: {
             chart: {
@@ -36,8 +43,30 @@ function ChartBar({ lat, lon }: Props) {
             },
             xaxis: {
                 categories: [
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                    18, 19, 20, 21, 22, 23, 24,
+                    '1:00',
+                    '2:00',
+                    '3:00',
+                    '4:00',
+                    '5:00',
+                    '6:00',
+                    '7:00',
+                    '8:00',
+                    '9:00',
+                    '10:00',
+                    '11:00',
+                    '12:00',
+                    '13:00',
+                    '14:00',
+                    '15:00',
+                    '16:00',
+                    '17:00',
+                    '18:00',
+                    '19:00',
+                    '20:00',
+                    '21:00',
+                    '22:00',
+                    '23:00',
+                    '24:00',
                 ],
             },
         },

@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import { Container, TextField } from '@mui/material'
-import { fetchCurrentWeather } from '../localStorage/thunks/fetchCurrentWeather'
+import { fetchCurrentWeather } from '../storage/thunks/fetchWeathers'
 import { useCustomDispatch } from '../hooks/store'
 
 const style = {
@@ -38,11 +38,7 @@ const ModalAddCity = ({ open, onClose }: Props) => {
         <div>
             <Modal open={open} onClose={onClose}>
                 <Box sx={style}>
-                    <Typography
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                    >
+                    <Typography id="modalTitle" variant="h6" component="h2">
                         Виберіть місто
                     </Typography>
                     <Container>

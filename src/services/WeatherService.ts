@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from '../axios';
-import { HourlyWeather, Weather } from '../localStorage/types';
+import { HourlyWeather, Weather } from '../storage/types';
 
 export class WeatherService {
   static getCurrentWeather(city: string): Promise<AxiosResponse<Weather>> {

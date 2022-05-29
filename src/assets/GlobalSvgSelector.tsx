@@ -53,8 +53,8 @@ export const GlobalSvgSelector = ({ id }: Props) => {
         case 'Rain':
             return (
                 <svg
-                    width="48"
-                    height="48"
+                    width="80"
+                    height="80"
                     viewBox="0 0 48 48"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
