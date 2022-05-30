@@ -56,7 +56,7 @@ export const InfoCityWeather = () => {
                         <Divider />
                         <Typography variant="h5">Сьогодні</Typography>
                         <Typography variant="body1">
-                            <Moment format="DD/MM/YYYY hh:mm:ss" unix>
+                            <Moment format="DD/MM/YYYY HH:mm:ss" unix>
                                 {location.dt}
                             </Moment>
                         </Typography>

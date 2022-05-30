@@ -55,7 +55,7 @@ const WeatherCard = ({ weather }: Props) => {
                             </Typography>
                             <Typography variant="body1">Сьогодні</Typography>
                             <Typography variant="body1">
-                                <Moment format="DD/MM/YYYY hh:mm:ss" unix>
+                                <Moment format="DD/MM/YYYY HH:mm:ss" unix>
                                     {weather.dt}
                                 </Moment>
                             </Typography>
