@@ -31,7 +31,7 @@ export const currentWeatherSlice = createSlice({
         weathers[existingCardIndex] = action.payload.data
         state.weathers = weathers
       } else {
-        state.weathers = [...state.weathers, action.payload.data];
+        state.weathers = [...weathers, action.payload.data];
       }
       localStorage.setItem('weathers', JSON.stringify(state.weathers))
     },

@@ -1,5 +1,3 @@
-import React from 'react'
-import * as ReactDOM from 'react-dom'
 import { createRoot } from 'react-dom/client'
 import { Header } from './components/Header'
 
@@ -19,7 +17,7 @@ describe('App component test', () => {
     })
 
     it('Renders correctly component Header', () => {
-        const header = document.querySelector('header')
+        const header = document.querySelector('headerr')
         expect(header).toBeInTheDocument
     })
 })

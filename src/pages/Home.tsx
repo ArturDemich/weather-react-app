@@ -1,5 +1,5 @@
 import { Button, Container, Grid } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCustomDispatch, useCustomSelector } from '../hooks/store'
 import { selectCurrentWeatherData } from '../storage/selectors'
 import WeatherCard from '../components/WeatherCard'
@@ -14,9 +14,10 @@ export const Home = () => {
     const dispatch = useCustomDispatch()
 
     const weatherFromLS: any = localStorage.getItem('weathers')
+    const parsedWeather = weatherFromLS ? JSON.parse(weatherFromLS) : []
 
     useEffect(() => {
-        dispatch(setWeathersFromLS({ weathers: JSON.parse(weatherFromLS) }))
+        dispatch(setWeathersFromLS({ weathers: parsedWeather }))
     }, [weatherFromLS])
 
     const { weathers } = useCustomSelector(selectCurrentWeatherData)
