@@ -43,9 +43,10 @@ const ModalAddCity = ({ open, onClose }: Props) => {
                     </Typography>
                     <Container>
                         <TextField
-                            id="outlined-basic"
-                            label="..."
-                            variant="outlined"
+                            id="standard-search"
+                            label="Search city"
+                            type="search"
+                            variant="standard"
                             sx={{ mt: '1rem' }}
                             value={input}
                             onChange={(event) => setInput(event.target.value)}
